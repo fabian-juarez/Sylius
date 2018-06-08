@@ -21,9 +21,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SingleResourceProviderSpec extends ObjectBehavior
 {
     function it_implements_single_resource_provider_interface(): void
@@ -157,6 +154,20 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
 
         $repository->findAll('foo')->willReturn($resource);
+
+        $this->get($requestConfiguration, $repository)->shouldReturn($resource);
+    }
+
+    function it_uses_a_custom_repository_if_configured(
+        RequestConfiguration $requestConfiguration,
+        RepositoryInterface $repository,
+        RepositoryInterface $customRepository,
+        ResourceInterface $resource
+    ): void {
+        $requestConfiguration->getRepositoryMethod()->willReturn([$customRepository, 'findAll']);
+        $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
+
+        $customRepository->findAll('foo')->willReturn($resource);
 
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }

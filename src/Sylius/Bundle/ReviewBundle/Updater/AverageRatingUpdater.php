@@ -18,10 +18,6 @@ use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class AverageRatingUpdater implements ReviewableRatingUpdaterInterface
 {
     /**
@@ -70,6 +66,7 @@ class AverageRatingUpdater implements ReviewableRatingUpdaterInterface
         $averageRating = $this->averageRatingCalculator->calculate($reviewSubject);
 
         $reviewSubject->setAverageRating($averageRating);
+
         $this->reviewSubjectManager->flush($reviewSubject);
     }
 }

@@ -13,15 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Country;
 
-use Behat\Mink\Element\Element;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use Toggles;
@@ -171,9 +168,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @return Element
+     * @return NodeElement
      */
-    private function getLastProvinceElement()
+    private function getLastProvinceElement(): NodeElement
     {
         $provinces = $this->getElement('provinces');
         $items = $provinces->findAll('css', 'div[data-form-collection="item"]');

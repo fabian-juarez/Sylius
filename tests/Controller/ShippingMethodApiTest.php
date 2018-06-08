@@ -17,9 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ShippingMethodApiTest extends JsonApiTestCase
 {
     /**
@@ -49,8 +46,10 @@ final class ShippingMethodApiTest extends JsonApiTestCase
     public function it_allows_showing_shipping_method()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/zones.yml');
-        $shippingMethods = $this->loadFixturesFromFile('resources/shipping_methods.yml');
+        $shippingMethods = $this->loadFixturesFromFiles([
+            'resources/zones.yml',
+            'resources/shipping_methods.yml',
+        ]);
         $shippingMethod = $shippingMethods['ups'];
 
         $this->client->request('GET', $this->getShippingMethodUrl($shippingMethod), [], [], static::$authorizedHeaderWithAccept);

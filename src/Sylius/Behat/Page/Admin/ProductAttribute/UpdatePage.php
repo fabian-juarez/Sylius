@@ -18,9 +18,6 @@ use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
@@ -62,16 +59,32 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function hasAttributeValue(string $value): bool
     {
-        return null !== $this->getElement('attribute_choice_list_element', ['%value%' => $value]);
+        return $this->hasElement('attribute_choice_list_element', ['%value%' => $value]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addAttributeValue(string $value): void
+    public function addAttributeValue(string $value, string $localeCode): void
     {
         $this->getDocument()->clickLink('Add');
-        $this->getLastAttributeChoiceElement()->find('css', 'input')->setValue($value);
+        $this
+            ->getLastAttributeChoiceElement()
+            ->find('css', 'div[data-locale="' . $localeCode . '"] input')
+            ->setValue($value)
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteAttributeValue(string $value): void
+    {
+        $attributeChoiceElement = $this
+            ->getElement('attribute_choice_list_element', ['%value%' => $value])
+            ->getParent()->getParent()->getParent()->getParent()
+        ;
+        $attributeChoiceElement->clickLink('Delete');
     }
 
     /**

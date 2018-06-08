@@ -20,10 +20,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Arnaud Langlade <aRn0D.dev@gmail.com>
- */
 abstract class AbstractDoctrineDriver extends AbstractDriver
 {
     /**
@@ -50,7 +46,7 @@ abstract class AbstractDoctrineDriver extends AbstractDriver
     {
         $container->setAlias(
             $metadata->getServiceId('manager'),
-            new Alias($this->getManagerServiceId($metadata))
+            new Alias($this->getManagerServiceId($metadata), true)
         );
     }
 

@@ -16,10 +16,6 @@ namespace Sylius\Component\Order\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class OrderItem implements OrderItemInterface
 {
     /**
@@ -28,7 +24,7 @@ class OrderItem implements OrderItemInterface
     protected $id;
 
     /**
-     * @var OrderInterface
+     * @var OrderInterface|null
      */
     protected $order;
 

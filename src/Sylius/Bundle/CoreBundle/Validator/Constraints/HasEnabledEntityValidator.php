@@ -23,9 +23,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 final class HasEnabledEntityValidator extends ConstraintValidator
 {
     /**
@@ -55,6 +52,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      */
     public function validate($entity, Constraint $constraint): void
     {
+        /** @var HasEnabledEntity $constraint */
         Assert::isInstanceOf($constraint, HasEnabledEntity::class);
 
         $enabled = $this->accessor->getValue($entity, $constraint->enabledPath);

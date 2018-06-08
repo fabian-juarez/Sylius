@@ -21,9 +21,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Daniel Leech <daniel@dantleech.com>
- */
 final class DebugResourceCommand extends Command
 {
     /**
@@ -84,7 +81,7 @@ EOT
     /**
      * @param OutputInterface $output
      */
-    private function listResources(OutputInterface $output)
+    private function listResources(OutputInterface $output): void
     {
         $resources = $this->registry->getAll();
         ksort($resources);
@@ -103,7 +100,7 @@ EOT
      * @param MetadataInterface $metadata
      * @param OutputInterface $output
      */
-    private function debugResource(MetadataInterface $metadata, OutputInterface $output)
+    private function debugResource(MetadataInterface $metadata, OutputInterface $output): void
     {
         $table = new Table($output);
         $information = [
@@ -132,7 +129,7 @@ EOT
      *
      * @return array
      */
-    private function flattenParameters(array $parameters, array $flattened = [], $prefix = '')
+    private function flattenParameters(array $parameters, array $flattened = [], $prefix = ''): array
     {
         foreach ($parameters as $key => $value) {
             if (is_array($value)) {

@@ -17,9 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductOptionApiTest extends JsonApiTestCase
 {
     /**
@@ -116,7 +113,7 @@ final class ProductOptionApiTest extends JsonApiTestCase
         $productOptions = $this->loadFixturesFromFile('resources/product_options.yml');
         $productOption = $productOptions['mug-size'];
 
-        $this->client->request('DELETE', $this->getProductOptionUrl($productOption), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getProductOptionUrl($productOption), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -187,7 +184,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/product-options/', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/product-options/', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product_option/create_validation_fail_response', Response::HTTP_BAD_REQUEST);

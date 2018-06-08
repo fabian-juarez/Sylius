@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class PromotionCouponApiTest extends JsonApiTestCase
 {
     /**
@@ -44,10 +41,11 @@ final class PromotionCouponApiTest extends JsonApiTestCase
      */
     public function it_does_not_allow_to_show_promotion_coupons_list_when_access_is_denied()
     {
-        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotions = $this->loadFixturesFromFiles([
+            'resources/promotions.yml',
+            'resources/promotion_coupons.yml',
+        ]);
         $promotion = $promotions['promotion2'];
-
-        $this->loadFixturesFromFile('resources/promotion_coupons.yml');
 
         $this->client->request('GET', $this->getPromotionCouponsUrl($promotion));
 
@@ -61,9 +59,12 @@ final class PromotionCouponApiTest extends JsonApiTestCase
     public function it_allows_indexing_promotion_coupons()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
+        $promotions = $this->loadFixturesFromFiles([
+            'resources/promotions.yml',
+            'resources/promotion_coupons.yml',
+        ]);
+
         $promotion = $promotions['promotion2'];
-        $this->loadFixturesFromFile('resources/promotion_coupons.yml');
 
         $this->client->request('GET', $this->getPromotionCouponsUrl($promotion), [], [], static::$authorizedHeaderWithAccept);
 
@@ -182,11 +183,13 @@ EOT;
     public function it_allows_to_get_a_coupon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
-        $promotion = $promotions['promotion2'];
+        $promotions = $this->loadFixturesFromFiles([
+            'resources/promotions.yml',
+            'resources/promotion_coupons.yml',
+        ]);
 
-        $promotion_coupons = $this->loadFixturesFromFile('resources/promotion_coupons.yml');
-        $coupon = $promotion_coupons['promotionCoupon1'];
+        $promotion = $promotions['promotion2'];
+        $coupon = $promotions['promotionCoupon1'];
 
         $this->client->request('GET', $this->getPromotionCouponUrl($promotion, $coupon), [], [], static::$authorizedHeaderWithAccept);
 
@@ -229,10 +232,13 @@ EOT;
     public function it_allows_to_fully_update_coupon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
-        $promotionCoupons = $this->loadFixturesFromFile('resources/promotion_coupons.yml');
+        $promotions = $this->loadFixturesFromFiles([
+            'resources/promotions.yml',
+            'resources/promotion_coupons.yml',
+        ]);
+
         $promotion = $promotions['promotion2'];
-        $promotionCoupon = $promotionCoupons['promotionCoupon2'];
+        $promotionCoupon = $promotions['promotionCoupon2'];
 
         $data =
 <<<EOT
@@ -288,10 +294,13 @@ EOT;
     public function it_allows_to_partially_update_coupon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
-        $promotionCoupons = $this->loadFixturesFromFile('resources/promotion_coupons.yml');
+        $promotions = $this->loadFixturesFromFiles([
+            'resources/promotions.yml',
+            'resources/promotion_coupons.yml',
+        ]);
+
         $promotion = $promotions['promotion2'];
-        $promotionCoupon = $promotionCoupons['promotionCoupon2'];
+        $promotionCoupon = $promotions['promotionCoupon2'];
 
         $data =
 <<<EOT
@@ -346,10 +355,13 @@ EOT;
     public function it_allows_to_delete_a_coupon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
-        $promotionCoupons = $this->loadFixturesFromFile('resources/promotion_coupons.yml');
+        $promotions = $this->loadFixturesFromFiles([
+            'resources/promotions.yml',
+            'resources/promotion_coupons.yml',
+        ]);
+
         $promotion = $promotions['promotion2'];
-        $promotionCoupon = $promotionCoupons['promotionCoupon2'];
+        $promotionCoupon = $promotions['promotionCoupon2'];
 
         $this->client->request('DELETE', $this->getPromotionCouponUrl($promotion, $promotionCoupon), [], [], static::$authorizedHeaderWithAccept);
 

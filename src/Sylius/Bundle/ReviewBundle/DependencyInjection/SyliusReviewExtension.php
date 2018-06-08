@@ -22,10 +22,6 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class SyliusReviewExtension extends AbstractResourceExtension
 {
     /**
@@ -79,22 +75,26 @@ final class SyliusReviewExtension extends AbstractResourceExtension
             ]);
 
             $reviewChangeListener
+                ->setPublic(true)
                 ->addTag('doctrine.event_listener', [
                     'event' => 'postPersist',
+                    'lazy' => true,
                 ])
                 ->addTag('doctrine.event_listener', [
                     'event' => 'postUpdate',
+                    'lazy' => true,
                 ])
                 ->addTag('doctrine.event_listener', [
                     'event' => 'postRemove',
+                    'lazy' => true,
                 ])
             ;
 
             $container->addDefinitions([
-                sprintf('sylius.%s_review.average_rating_updater', $reviewSubject) => new Definition(AverageRatingUpdater::class, [
+                sprintf('sylius.%s_review.average_rating_updater', $reviewSubject) => (new Definition(AverageRatingUpdater::class, [
                     new Reference('sylius.average_rating_calculator'),
                     new Reference(sprintf('sylius.manager.%s_review', $reviewSubject)),
-                ]),
+                ]))->setPublic(true),
                 sprintf('sylius.listener.%s_review_change', $reviewSubject) => $reviewChangeListener,
             ]);
         }

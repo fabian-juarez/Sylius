@@ -21,9 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeCollector extends DataCollector
 {
     /**
@@ -96,6 +93,16 @@ final class ThemeCollector extends DataCollector
         $this->data['used_theme'] = $usedTheme;
         $this->data['used_themes'] = null !== $usedTheme ? $this->themeHierarchyProvider->getThemeHierarchy($usedTheme) : [];
         $this->data['themes'] = $this->themeRepository->findAll();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reset(): void
+    {
+        $this->data['used_theme'] = null;
+        $this->data['used_themes'] = [];
+        $this->data['themes'] = [];
     }
 
     /**

@@ -23,9 +23,6 @@ use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
@@ -353,6 +350,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     private function saveImageUrlForType(string $type, string $imageUrl): void
     {
+        if (false !== strpos($imageUrl, 'data:image/jpeg')) {
+            return;
+        }
+
         $this->imageUrls[$type] = $imageUrl;
     }
 }

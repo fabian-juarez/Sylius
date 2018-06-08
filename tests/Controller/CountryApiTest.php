@@ -17,9 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Jeroen Thora <jeroen.thora@intracto.com>
- */
 final class CountryApiTest extends JsonApiTestCase
 {
     /**
@@ -184,7 +181,7 @@ EOT;
         $countries = $this->loadFixturesFromFile('resources/countries.yml');
         $country = $countries['country_NL'];
 
-        $this->client->request('DELETE', $this->getCountryUrl($country), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getCountryUrl($country), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);

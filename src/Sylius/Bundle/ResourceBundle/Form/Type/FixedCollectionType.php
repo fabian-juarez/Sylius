@@ -18,9 +18,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FixedCollectionType extends AbstractType
 {
     /**
@@ -71,9 +68,9 @@ final class FixedCollectionType extends AbstractType
     }
 
     /**
-     * @return callable
+     * @return \Closure
      */
-    private function optionalCallableNormalizer(): callable
+    private function optionalCallableNormalizer(): \Closure
     {
         return function (Options $options, $value) {
             if (is_callable($value)) {

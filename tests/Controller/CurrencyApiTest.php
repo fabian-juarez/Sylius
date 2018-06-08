@@ -17,9 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Axel Vankrunkelsven <axel@digilabs.be>
- */
 final class CurrencyApiTest extends JsonApiTestCase
 {
     /**
@@ -176,7 +173,7 @@ EOT;
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
         $currency = $currencies['currency_1'];
 
-        $this->client->request('DELETE', $this->getCurrencyUrl($currency), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getCurrencyUrl($currency), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);

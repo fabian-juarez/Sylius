@@ -21,7 +21,7 @@ To add a new filter, we need to create an appropriate class and form type.
             // Your filtering logic. DataSource is kind of query builder.
             // $data['stats'] contains the submitted value!
             // here is an example
-            $dataSource->restrict($dataSource->getExpressionBuilder()->equal('stats', $data['stats']));
+            $dataSource->restrict($dataSource->getExpressionBuilder()->equals('stats', $data['stats']));
         }
     }
 
@@ -44,7 +44,7 @@ And the form type:
         {
             $builder->add(
                 'stats',
-                ChoiceType:class,
+                ChoiceType::class,
                 ['choices' => range($options['range'][0], $options['range'][1])]
             );
         }

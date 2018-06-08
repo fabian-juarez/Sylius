@@ -28,10 +28,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ManagingOrdersContext implements Context
 {
     /**
@@ -168,7 +164,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyFilterDateFromAs($dateTime)
     {
-        $this->indexPage->specifyFilterDateFrom(new \DateTime($dateTime));
+        $this->indexPage->specifyFilterDateFrom($dateTime);
     }
 
     /**
@@ -176,7 +172,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyFilterDateToAs($dateTime)
     {
-        $this->indexPage->specifyFilterDateTo(new \DateTime($dateTime));
+        $this->indexPage->specifyFilterDateTo($dateTime);
     }
 
     /**

@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 use Sylius\Bundle\CoreBundle\Application\Kernel;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class AppKernel extends Kernel
 {
     /**
@@ -31,6 +27,11 @@ class AppKernel extends Kernel
             new \FOS\OAuthServerBundle\FOSOAuthServerBundle(), // Required by SyliusAdminApiBundle.
             new \Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle(),
         ];
+
+        if (in_array($this->getEnvironment(), ['dev', 'test', 'test_cached'], true)) {
+            $bundles[] = new \Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle();
+            $bundles[] = new \Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle();
+        }
 
         return array_merge(parent::registerBundles(), $bundles);
     }

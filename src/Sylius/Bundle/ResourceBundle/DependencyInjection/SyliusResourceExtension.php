@@ -22,10 +22,6 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 final class SyliusResourceExtension extends Extension
 {
     /**
@@ -46,7 +42,7 @@ final class SyliusResourceExtension extends Extension
         if ($config['translation']['enabled']) {
             $loader->load('services/integrations/translation.xml');
 
-            $container->setAlias('sylius.translation_locale_provider', $config['translation']['locale_provider']);
+            $container->setAlias('sylius.translation_locale_provider', $config['translation']['locale_provider'])->setPublic(true);
         }
 
         $container->setParameter('sylius.resource.settings', $config['settings']);

@@ -15,9 +15,6 @@ namespace Sylius\Tests\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class OrderApiTest extends CheckoutApiTestCase
 {
     /**
@@ -82,9 +79,11 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_allows_to_get_an_order_with_promotion()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
-        $this->loadFixturesFromFile('resources/checkout_promotion.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+            'resources/checkout_promotion.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -99,9 +98,12 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_allows_to_get_an_order_with_coupon_based_promotion()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
-        $this->loadFixturesFromFile('resources/checkout_coupon_based_promotion.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+            'resources/checkout_coupon_based_promotion.yml',
+        ]);
+
         $cartId = $this->createCart();
 
         $this->addItemToCart($cartId);
@@ -148,8 +150,10 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_allows_to_cancel_an_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -193,8 +197,10 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_returns_not_found_response_when_shipping_does_not_exist_for_the_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -209,8 +215,10 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_allows_to_ship_an_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -235,8 +243,10 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_allows_to_ship_an_order_with_shipment_code()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -292,8 +302,10 @@ EOT;
      */
     public function it_returns_not_found_response_when_completing_payment_does_not_exist_for_the_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -308,8 +320,10 @@ EOT;
      */
     public function it_allows_to_complete_the_payment_for_the_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -334,8 +348,10 @@ EOT;
      */
     public function it_allows_to_complete_the_payment_and_ship_the_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 

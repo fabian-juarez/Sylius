@@ -17,9 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ExchangeRateApiTest extends JsonApiTestCase
 {
     /**
@@ -323,7 +320,7 @@ EOT;
         /** @var ExchangeRateInterface $exchangeRate */
         $exchangeRate = $exchangeRates['eur_gbp_exchange_rate'];
 
-        $this->client->request('DELETE', $this->getExchangeRateUrl($exchangeRate), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getExchangeRateUrl($exchangeRate), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);

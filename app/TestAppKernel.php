@@ -15,12 +15,11 @@ require_once __DIR__.'/AppKernel.php';
 
 use ProxyManager\Proxy\VirtualProxyInterface;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
-class TestAppKernel extends AppKernel
+class TestAppKernel extends AppKernel implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -43,6 +42,20 @@ class TestAppKernel extends AppKernel
     }
 
     /**
+     * Hotfix for https://github.com/symfony/symfony/issues/27494
+     *
+     * @internal
+     */
+    public function process(ContainerBuilder $container): void
+    {
+        $clientDefinition = $container->findDefinition('test.client');
+
+        if (count($clientDefinition->getArguments()) >= 5) {
+            $clientDefinition->replaceArgument(4, null);
+        }
+    }
+
+    /**
      * Remove all container references from all loaded services
      *
      * @param ContainerInterface $container
@@ -55,7 +68,11 @@ class TestAppKernel extends AppKernel
 
         $services = $containerServicesPropertyReflection->getValue($container) ?: [];
         foreach ($services as $serviceId => $service) {
-            if (in_array($serviceId, $this->getServicesToIgnoreDuringContainerCleanup())) {
+            if (null === $service) {
+                continue;
+            }
+
+            if (in_array($serviceId, $this->getServicesToIgnoreDuringContainerCleanup(), true)) {
                 continue;
             }
 

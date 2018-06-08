@@ -19,9 +19,6 @@ use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CheckoutShippingContext implements Context
 {
     /**
@@ -192,6 +189,14 @@ final class CheckoutShippingContext implements Context
     public function iShouldSeeShippingMethod($shippingMethodName)
     {
         Assert::true($this->selectShippingPage->hasShippingMethod($shippingMethodName));
+    }
+
+    /**
+     * @Then I should see selected :shippingMethodName shipping method
+     */
+    public function iShouldSeeSelectedShippingMethod($shippingMethodName)
+    {
+        Assert::same($this->selectShippingPage->getSelectedShippingMethodName(), $shippingMethodName);
     }
 
     /**
