@@ -22,9 +22,6 @@ use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class OrderShipmentProcessor implements OrderProcessorInterface
 {
     /**
@@ -83,9 +80,9 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     /**
      * @param OrderInterface $order
      *
-     * @return ShipmentInterface
+     * @return ShipmentInterface|null
      */
-    private function getOrderShipment(OrderInterface $order)
+    private function getOrderShipment(OrderInterface $order): ?ShipmentInterface
     {
         if ($order->hasShipments()) {
             return $order->getShipments()->first();

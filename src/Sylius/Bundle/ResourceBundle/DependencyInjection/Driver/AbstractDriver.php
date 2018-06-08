@@ -21,10 +21,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Arnaud Langlade <aRn0D.dev@gmail.com>
- */
 abstract class AbstractDriver implements DriverInterface
 {
     /**
@@ -74,6 +70,7 @@ abstract class AbstractDriver implements DriverInterface
     {
         $definition = new Definition($metadata->getClass('controller'));
         $definition
+            ->setPublic(true)
             ->setArguments([
                 $this->getMetadataDefinition($metadata),
                 new Reference('sylius.resource_controller.request_configuration_factory'),

@@ -22,9 +22,6 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 final class InstallerContext implements Context
 {
     /**
@@ -58,6 +55,7 @@ final class InstallerContext implements Context
     private $inputChoices = [
         'currency' => 'USD',
         'e-mail' => 'test@email.com',
+        'username' => 'test',
         'password' => 'pswd',
         'confirmation' => 'pswd',
     ];
@@ -141,6 +139,7 @@ final class InstallerContext implements Context
     public function iProvideFullAdministratorData()
     {
         $this->inputChoices['e-mail'] = 'test@admin.com';
+        $this->inputChoices['username'] = 'test';
         $this->inputChoices['password'] = 'pswd1$';
         $this->inputChoices['confirmation'] = $this->inputChoices['password'];
     }

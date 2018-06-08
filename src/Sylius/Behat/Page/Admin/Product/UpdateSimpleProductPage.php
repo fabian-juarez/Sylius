@@ -25,10 +25,6 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProductPageInterface
 {
     use ChecksCodeImmutability;
@@ -576,6 +572,10 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
     private function saveImageUrlForType(string $type, string $imageUrl): void
     {
+        if (false !== strpos($imageUrl, 'data:image/jpeg')) {
+            return;
+        }
+
         $this->imageUrls[$type] = $imageUrl;
     }
 }

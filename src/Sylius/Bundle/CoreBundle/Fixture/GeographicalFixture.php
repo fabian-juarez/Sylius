@@ -24,9 +24,6 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Intl\Intl;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class GeographicalFixture extends AbstractFixture
 {
     /**
@@ -194,7 +191,7 @@ class GeographicalFixture extends AbstractFixture
      * @param array $zones
      * @param \Closure $zoneValidator
      */
-    private function loadZones(array $zones, \Closure $zoneValidator)
+    private function loadZones(array $zones, \Closure $zoneValidator): void
     {
         foreach ($zones as $zoneCode => $zoneOptions) {
             $zoneName = $zoneOptions['name'];
@@ -226,7 +223,7 @@ class GeographicalFixture extends AbstractFixture
      * @param array $provinces
      * @param CountryInterface $country
      */
-    private function loadProvincesForCountry(array $provinces, CountryInterface $country)
+    private function loadProvincesForCountry(array $provinces, CountryInterface $country): void
     {
         foreach ($provinces as $provinceCode => $provinceName) {
             /** @var ProvinceInterface $province */
@@ -250,7 +247,7 @@ class GeographicalFixture extends AbstractFixture
      *
      * @throws \InvalidArgumentException
      */
-    private function getZoneType(array $zoneOptions)
+    private function getZoneType(array $zoneOptions): string
     {
         switch (true) {
             case count($zoneOptions['countries']) > 0:
@@ -269,7 +266,7 @@ class GeographicalFixture extends AbstractFixture
      *
      * @return array
      */
-    private function getZoneMembers(array $zoneOptions)
+    private function getZoneMembers(array $zoneOptions): array
     {
         $zoneType = $this->getZoneType($zoneOptions);
 
@@ -290,7 +287,7 @@ class GeographicalFixture extends AbstractFixture
      *
      * @return \Closure
      */
-    private function provideZoneValidator(array $options)
+    private function provideZoneValidator(array $options): \Closure
     {
         $memberValidators = [
             ZoneInterface::TYPE_COUNTRY => function ($countryCode) use ($options) {

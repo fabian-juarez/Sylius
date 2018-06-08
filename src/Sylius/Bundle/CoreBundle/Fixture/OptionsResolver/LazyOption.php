@@ -33,8 +33,6 @@ use Webmozart\Assert\Assert;
  *     - null if user explicitly set it (['option' => null])
  *     - random one if user skipped that option ([])
  *     - specific one if user defined that option (['option' => 'CODE'])
- *
- * @author Kamil Kokot <kamil@kokot.me>
  */
 final class LazyOption
 {
@@ -67,7 +65,7 @@ final class LazyOption
     public static function randomOneOrNull(RepositoryInterface $repository, int $chanceOfRandomOne): \Closure
     {
         return function (Options $options) use ($repository, $chanceOfRandomOne) {
-            if (mt_rand(1, 100) > $chanceOfRandomOne) {
+            if (random_int(1, 100) > $chanceOfRandomOne) {
                 return null;
             }
 

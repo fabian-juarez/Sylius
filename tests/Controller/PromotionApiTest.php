@@ -17,9 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class PromotionApiTest extends JsonApiTestCase
 {
     /**
@@ -338,9 +335,11 @@ EOT;
     public function it_allows_to_create_promotion_with_actions()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/channels.yml');
-        $this->loadFixturesFromFile('resources/products.yml');
-        $this->loadFixturesFromFile('resources/product_taxons.yml');
+        $this->loadFixturesFromFiles([
+            'resources/channels.yml',
+            'resources/products.yml',
+            'resources/product_taxons.yml',
+        ]);
 
         $data =
 <<<EOT

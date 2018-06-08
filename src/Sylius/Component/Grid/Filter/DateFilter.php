@@ -16,9 +16,6 @@ namespace Sylius\Component\Grid\Filter;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class DateFilter implements FilterInterface
 {
     public const NAME = 'date';
@@ -34,7 +31,7 @@ final class DateFilter implements FilterInterface
 
         $field = (string) $this->getOption($options, 'field', $name);
 
-        $from = isset($data['from']) ? $this->getDateTime($data['from']) : null;
+        $from = isset($data['from']) ? $this->getDateTime($data['from'], '00:00') : null;
         if (null !== $from) {
             $inclusive = (bool) $this->getOption($options, 'inclusive_from', self::DEFAULT_INCLUSIVE_FROM);
             if (true === $inclusive) {
@@ -44,7 +41,7 @@ final class DateFilter implements FilterInterface
             }
         }
 
-        $to = isset($data['to']) ? $this->getDateTime($data['to']) : null;
+        $to = isset($data['to']) ? $this->getDateTime($data['to'], '23:59') : null;
         if (null !== $to) {
             $inclusive = (bool) $this->getOption($options, 'inclusive_to', self::DEFAULT_INCLUSIVE_TO);
             if (true === $inclusive) {
@@ -69,17 +66,18 @@ final class DateFilter implements FilterInterface
 
     /**
      * @param string[] $data
+     * @param string $defaultTime
      *
      * @return string|null
      */
-    private function getDateTime(array $data): ?string
+    private function getDateTime(array $data, string $defaultTime): ?string
     {
         if (empty($data['date'])) {
             return null;
         }
 
         if (empty($data['time'])) {
-            return $data['date'];
+            $data['time'] = $defaultTime;
         }
 
         return $data['date'] . ' ' . $data['time'];

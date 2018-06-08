@@ -23,9 +23,6 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryInterface
 {
     public const DEFAULT_CHANNEL_CODE = 'WEB-US';
@@ -144,11 +141,13 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         $channel->setDefaultLocale($locale);
         $channel->setTaxCalculationStrategy('order_items_based');
 
-        $defaultData['channel'] = $channel;
-        $defaultData['country'] = $this->createCountry();
-        $defaultData['currency'] = $currency;
-        $defaultData['locale'] = $locale;
-        $defaultData['zone'] = $this->createZone();
+        $defaultData = [
+            'channel' => $channel,
+            'country' => $this->createCountry(),
+            'currency' => $currency,
+            'locale' => $locale,
+            'zone' => $this->createZone(),
+        ];
 
         $this->channelRepository->add($channel);
         $this->countryRepository->add($defaultData['country']);

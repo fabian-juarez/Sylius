@@ -23,9 +23,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class PaymentMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     public const DEFAULT_LOCALE = 'en_US';
@@ -96,6 +93,7 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
 
             $paymentMethod->setName($options['name']);
             $paymentMethod->setDescription($options['description']);
+            $paymentMethod->setInstructions($options['instructions']);
         }
 
         foreach ($options['channels'] as $channel) {
@@ -120,6 +118,8 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
             ->setDefault('description', function (Options $options): string {
                 return $this->faker->sentence();
             })
+            ->setDefault('instructions', null)
+            ->setAllowedTypes('instructions', ['null', 'string'])
             ->setDefault('gatewayName', 'Offline')
             ->setDefault('gatewayFactory', 'offline')
             ->setDefault('gatewayConfig', [])

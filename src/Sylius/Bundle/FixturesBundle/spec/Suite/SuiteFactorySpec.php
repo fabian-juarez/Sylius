@@ -22,9 +22,6 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteFactoryInterface;
 use Symfony\Component\Config\Definition\Processor;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SuiteFactorySpec extends ObjectBehavior
 {
     function let(FixtureRegistryInterface $fixtureRegistry, ListenerRegistryInterface $listenerRegistry, Processor $optionsProcessor): void
@@ -217,7 +214,7 @@ final class SuiteFactorySpec extends ObjectBehavior
      *
      * @return \Generator
      */
-    private function createGenerator(Collaborator ...$collaborators)
+    private function createGenerator(Collaborator ...$collaborators): \Generator
     {
         foreach ($collaborators as $collaborator) {
             yield $collaborator->getWrappedObject() => [];

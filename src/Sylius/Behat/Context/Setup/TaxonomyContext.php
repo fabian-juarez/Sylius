@@ -27,9 +27,6 @@ use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TaxonomyContext implements Context
 {
     /**
@@ -144,7 +141,8 @@ final class TaxonomyContext implements Context
 
         $taxon->addImage($taxonImage);
 
-        $this->objectManager->flush($taxon);
+        $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
     }
 
     /**
@@ -155,7 +153,8 @@ final class TaxonomyContext implements Context
         $taxon->addChild($this->createTaxon($firstTaxonName));
         $taxon->addChild($this->createTaxon($secondTaxonName));
 
-        $this->objectManager->flush($taxon);
+        $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
     }
 
     /**
@@ -205,6 +204,6 @@ final class TaxonomyContext implements Context
      */
     private function getParameter($name)
     {
-        return isset($this->minkParameters[$name]) ? $this->minkParameters[$name] : null;
+        return $this->minkParameters[$name] ?? null;
     }
 }

@@ -17,9 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class AdminUserApiTest extends JsonApiTestCase
 {
     /**
@@ -73,7 +70,7 @@ class AdminUserApiTest extends JsonApiTestCase
         $data =
 <<<EOT
         {
-            "username": "Barlog",
+            "username": "Balrog",
             "email": "teamEvil@middleearth.com",
             "plainPassword": "youShallNotPass",
             "localeCode": "en_US"

@@ -20,9 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class AddressType extends AbstractResourceType
 {
     /**
@@ -90,7 +87,7 @@ final class AddressType extends AbstractResourceType
             ->setDefaults([
                 'validation_groups' => function (Options $options) {
                     if ($options['shippable']) {
-                        $this->validationGroups[] = 'shippable';
+                        return array_merge($this->validationGroups, ['shippable']);
                     }
 
                     return $this->validationGroups;

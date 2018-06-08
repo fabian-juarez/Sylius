@@ -22,10 +22,6 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class SyliusReviewExtension extends AbstractResourceExtension
 {
     /**
@@ -81,12 +77,15 @@ final class SyliusReviewExtension extends AbstractResourceExtension
             $reviewChangeListener
                 ->addTag('doctrine.event_listener', [
                     'event' => 'postPersist',
+                    'lazy' => true,
                 ])
                 ->addTag('doctrine.event_listener', [
                     'event' => 'postUpdate',
+                    'lazy' => true,
                 ])
                 ->addTag('doctrine.event_listener', [
                     'event' => 'postRemove',
+                    'lazy' => true,
                 ])
             ;
 

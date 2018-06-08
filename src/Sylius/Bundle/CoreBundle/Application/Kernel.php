@@ -17,6 +17,7 @@ use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolver;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
 use Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
@@ -26,19 +27,16 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
+use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class Kernel extends HttpKernel
 {
-    public const VERSION = '1.0.0';
-    public const VERSION_ID = '10000';
+    public const VERSION = '1.1.7-DEV';
+    public const VERSION_ID = '10107';
     public const MAJOR_VERSION = '1';
-    public const MINOR_VERSION = '0';
-    public const RELEASE_VERSION = '0';
-    public const EXTRA_VERSION = '';
+    public const MINOR_VERSION = '1';
+    public const RELEASE_VERSION = '7';
+    public const EXTRA_VERSION = 'DEV';
 
     /**
      * {@inheritdoc}
@@ -102,9 +100,9 @@ class Kernel extends HttpKernel
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test', 'test_cached'], true)) {
+            $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
         }
 
         return $bundles;
@@ -127,6 +125,9 @@ class Kernel extends HttpKernel
      */
     protected function getContainerLoader(ContainerInterface $container): LoaderInterface
     {
+        /** @var ContainerBuilder $container */
+        Assert::isInstanceOf($container, ContainerBuilder::class);
+
         $locator = new FileLocator($this, $this->getRootDir() . '/Resources');
         $resolver = new LoaderResolver([
             new XmlFileLoader($container, $locator),

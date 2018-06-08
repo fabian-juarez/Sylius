@@ -17,9 +17,6 @@ use ProxyManager\Proxy\VirtualProxyInterface;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class TestAppKernel extends AppKernel
 {
     /**
@@ -55,7 +52,11 @@ class TestAppKernel extends AppKernel
 
         $services = $containerServicesPropertyReflection->getValue($container) ?: [];
         foreach ($services as $serviceId => $service) {
-            if (in_array($serviceId, $this->getServicesToIgnoreDuringContainerCleanup())) {
+            if (null === $service) {
+                continue;
+            }
+
+            if (in_array($serviceId, $this->getServicesToIgnoreDuringContainerCleanup(), true)) {
                 continue;
             }
 

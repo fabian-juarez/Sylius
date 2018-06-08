@@ -46,7 +46,7 @@ As a result you will get the ``Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepo
          *
          * @return array
          */
-        public function findByOnHand($limit = 8)
+        public function findByOnHand(int $limit = 8): array
         {
             return $this->createQueryBuilder('o')
                 ->addSelect('variant')
@@ -77,7 +77,7 @@ Then we are limiting the query to 8 by default, to get only 8 products that are 
                 classes:
                     repository: AppBundle\Repository\ProductRepository
 
-**3.** After configuring the ``sylius.product.repository`` service has your ``findByOnHand()`` method available.
+**3.** After configuring the ``sylius.repository.product`` service has your ``findByOnHand()`` method available.
 You can form now on use your method in any **Controller**.
 
 .. code-block:: php

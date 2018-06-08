@@ -16,9 +16,6 @@ namespace Sylius\Component\Addressing\Model;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ProvinceInterface extends ResourceInterface, CodeAwareInterface
 {
     /**
@@ -47,7 +44,7 @@ interface ProvinceInterface extends ResourceInterface, CodeAwareInterface
     public function getCountry(): ?CountryInterface;
 
     /**
-     * @param CountryInterface $country
+     * @param CountryInterface|null $country
      */
     public function setCountry(?CountryInterface $country): void;
 }

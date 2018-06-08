@@ -18,9 +18,6 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class VariantResolverHelper extends Helper
 {
     /**
@@ -39,9 +36,9 @@ class VariantResolverHelper extends Helper
     /**
      * @param ProductInterface $product
      *
-     * @return ProductVariantInterface
+     * @return ProductVariantInterface|null
      */
-    public function resolveVariant(ProductInterface $product): ProductVariantInterface
+    public function resolveVariant(ProductInterface $product): ?ProductVariantInterface
     {
         return $this->productVariantResolver->getVariant($product);
     }

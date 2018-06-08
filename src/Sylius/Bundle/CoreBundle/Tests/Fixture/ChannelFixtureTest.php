@@ -15,13 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\ChannelFixture;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
-final class ChannelFixtureTest extends \PHPUnit_Framework_TestCase
+final class ChannelFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
