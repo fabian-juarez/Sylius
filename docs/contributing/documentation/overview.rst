@@ -23,14 +23,14 @@ then clone your fork to you local destination:
 
 .. code-block:: bash
 
-    $ git clone git@github.com:YOUR_USERNAME/Sylius.git
+    git clone git@github.com:YOUR_USERNAME/Sylius.git
 
 Under the name ``origin`` you will have from now on the access to your fork.
 Add also the main repository as the ``upstream`` remote.
 
 .. code-block:: bash
 
-    $ git remote add upstream git@github.com:Sylius/Sylius.git
+    git remote add upstream git@github.com:Sylius/Sylius.git
 
 
 Choose the right Base Branch
@@ -49,7 +49,7 @@ Create a dedicated branch for your changes (for organization):
 
 .. code-block:: bash
 
-    $ git checkout -b docs/improving_foo_and_bar
+    git checkout -b docs/improving_foo_and_bar
 
 You can now make your changes directly to this branch and commit them.
 Remember to name your commits descriptively, keep them possibly small, with just unitary changes (such that change something only in one part of the docs, not everywhere).
@@ -61,7 +61,7 @@ Your pull request will be reviewed, you will be asked to apply fixes if necessar
 Testing Documentation
 ~~~~~~~~~~~~~~~~~~~~~
 
-To test the documentation before a commit you need to install Sphinx.
+To test the documentation before a commit you need to install Sphinx and needed dependencies.
 
 .. tip::
 
@@ -71,9 +71,27 @@ Our recommendation is to install ``Sphinx`` via `Pip`_.
 
 .. code-block:: bash
 
-    $ pip install -U sphinx
+    pip3 install --no-cache-dir -r ./docs/requirements.txt
 
-Then run ``sphinx-build -b html ./docs ./docs/build`` and view the generated HTML files in the ``docs/build`` directory. You can open them in your browser and check how they look!
+Then run
+
+.. code-block:: bash
+
+    sphinx-build -b html ./docs ./docs/build
+
+and view the generated HTML files in the ``docs/build`` directory. You can open them in your browser and check how they look!
+
+.. warning::
+
+    If you have problems with using ``Sphinx``, please make sure that you're using Python 3.
+    Using ``pip``, try to uninstall old dependencies and install latest version Python and Sphinx.
+
+    .. code-block:: bash
+
+        pip uninstall sphinx
+        pip3 uninstall sphinx
+
+    If you have installed old sphinx by your operating system tools like: brew, apt-get or yum, you have to uninstall it too.
 
 Creating a Pull Request
 ~~~~~~~~~~~~~~~~~~~~~~~

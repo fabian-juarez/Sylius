@@ -43,7 +43,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         $productsList = $this->getElement('products');
 
-        return $productsList->find('css', '[data-test-product]:last-child [data-test-product-content] > a')->getText();
+        return $productsList->find('css', '[data-test-product]:last-child [data-test-product-content] [data-test-product-name]')->getText();
     }
 
     public function search(string $name): void
@@ -64,7 +64,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function isProductOnList(string $productName): bool
     {
-        try{
+        try {
             $this->getElement('product_name', ['%productName%' => $productName]);
         } catch (ElementNotFoundException $e) {
             return false;

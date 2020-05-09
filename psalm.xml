@@ -17,6 +17,8 @@
             <directory name="src/Sylius/Bundle/AddressingBundle/Tests" />
             <directory name="src/Sylius/Bundle/AdminApiBundle/spec" />
             <directory name="src/Sylius/Bundle/AdminApiBundle/Tests" />
+            <directory name="src/Sylius/Bundle/ApiBundle/spec" />
+            <directory name="src/Sylius/Bundle/ApiBundle/Tests" />
             <directory name="src/Sylius/Bundle/AdminBundle/spec" />
             <directory name="src/Sylius/Bundle/AdminBundle/Tests" />
             <directory name="src/Sylius/Bundle/AttributeBundle/spec" />
@@ -44,6 +46,7 @@
             <directory name="src/Sylius/Bundle/PromotionBundle/test" />
             <directory name="src/Sylius/Bundle/PromotionBundle/Tests" />
             <directory name="src/Sylius/Bundle/ReviewBundle/spec" />
+            <directory name="src/Sylius/Bundle/ShippingBundle/spec" />
             <directory name="src/Sylius/Bundle/ShippingBundle/test" />
             <directory name="src/Sylius/Bundle/ShopBundle/spec" />
             <directory name="src/Sylius/Bundle/TaxationBundle/spec" />
@@ -120,6 +123,7 @@
 
         <InternalMethod>
             <errorLevel type="info">
+                <referencedMethod name="PHPUnit\Framework\TestCase::__construct" />
                 <referencedMethod name="Symfony\Bundle\SecurityBundle\Security\_FirewallMap::getFirewallConfig" />
             </errorLevel>
         </InternalMethod>
@@ -179,8 +183,9 @@
 
         <TooManyArguments>
             <errorLevel type="info">
-                <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
+                <referencedFunction name="Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch" />
                 <referencedFunction name="Symfony\Component\HttpKernel\Config\FileLocator::__construct" />
+                <referencedFunction name="Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch" />
             </errorLevel>
             <errorLevel type="suppress">
                 <referencedFunction name="Doctrine\ORM\Query\Expr::andX" />
@@ -215,10 +220,13 @@
         <!-- remove after guzzlehttp-release -->
         <!-- see https://github.com/guzzle/guzzle/pull/2273 -->
         <InvalidCatch errorLevel="info" />
-
     </issueHandlers>
 
     <stubs>
         <file name="etc/psalm/ZendPriorityQueueStub.php" />
     </stubs>
+
+    <plugins>
+        <pluginClass class="Psalm\MockeryPlugin\Plugin" />
+    </plugins>
 </psalm>

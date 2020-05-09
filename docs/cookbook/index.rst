@@ -79,6 +79,16 @@ Promotions
 
 .. include:: /cookbook/promotions/map.rst.inc
 
+Inventory
+---------
+
+.. toctree::
+    :hidden:
+
+    inventory/custom-inventory-sources-filter
+
+.. include:: /cookbook/inventory/map.rst.inc
+
 Images
 ------
 
@@ -87,6 +97,7 @@ Images
 
     images/images
     images/images-on-entity
+    images/images-on-aws-s3
 
 .. include:: /cookbook/images/map.rst.inc
 
@@ -96,6 +107,7 @@ Deployment
 .. toctree::
     :hidden:
 
+    deployment/symfonycloud
     deployment/platform-sh
     deployment/cloudways
     deployment/cron-jobs

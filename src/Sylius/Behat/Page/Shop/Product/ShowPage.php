@@ -91,14 +91,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         $row = $nameTd->getParent();
 
-        return trim($row->find('css', 'td.sylius-product-attribute-value')->getText());
+        return trim($row->find('css', '[data-test-product-attribute-value]')->getText());
     }
 
     public function getAttributes(): array
     {
         $attributesTable = $this->getElement('attributes');
 
-        return $attributesTable->findAll('css', 'tr > td[data-test-product-attribute-name]');
+        return $attributesTable->findAll('css', '[data-test-product-attribute-name]');
     }
 
     public function getAverageRating(): float
@@ -139,7 +139,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasAssociation(string $productAssociationName): bool
     {
-        try{
+        try {
             $this->getElement('association', ['%associationName%' => $productAssociationName]);
         } catch (ElementNotFoundException $e) {
             return false;
@@ -170,7 +170,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasReviewTitled(string $title): bool
     {
-        try{
+        try {
             $element = $this->getElement('reviews_comment', ['%title%' => $title]);
         } catch (ElementNotFoundException $e) {
             return false;
@@ -186,7 +186,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function isMainImageDisplayed(): bool
     {
-        if ( !$this->hasElement('main_image')) {
+        if (!$this->hasElement('main_image')) {
             return false;
         }
 

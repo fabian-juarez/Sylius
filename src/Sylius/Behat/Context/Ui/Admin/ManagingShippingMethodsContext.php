@@ -98,9 +98,9 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I define it for the :zoneName zone
+     * @When I define it for the zone named :zoneName
      */
-    public function iDefineItForTheZone($zoneName)
+    public function iDefineItForTheZone(string $zoneName): void
     {
         $this->createPage->chooseZone($zoneName);
     }
@@ -215,7 +215,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
     public function theCodeFieldShouldBeDisabled()
     {
